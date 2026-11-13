@@ -1,0 +1,66 @@
+---
+title: "Projects"
+subtitle: "A forest assessment and a weather dashboard"
+---
+
+## Monongahela National Forest
+
+Biophysical Settings describe the vegetation a place would have supported before Euro-American settlement, given the land and its historical disturbance regime. This summary covers Monongahela National Forest. The [table](inputs/bps_monongahela.csv) is one row per setting.
+
+```{r}
+#| label: bps-chart
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6.5
+#| fig-cap: "Ten largest Biophysical Settings on Monongahela National Forest."
+#| fig-alt: "Horizontal bar chart of the ten most extensive Biophysical Settings. Spruce-fir forest is the longest bar, followed by dry-mesic oak forest."
+
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+bps <- read.csv("inputs/bps_monongahela.csv")
+
+# Map-zone variants can share a name. Sum acres, then keep the top 10.
+top10 <- bps |>
+  group_by(BPS_NAME, GROUPVEG) |>
+  summarize(ACRES = sum(ACRES), .groups = "drop") |>
+  slice_max(order_by = ACRES, n = 10)
+
+top_row <- top10 |> slice_max(order_by = ACRES, n = 1)
+
+group_colors <- c(
+  "Conifer" = "#1B6B3A",
+  "Hardwood" = "#C47B2B",
+  "Hardwood-Conifer" = "#6B4C2A",
+  "Riparian" = "#2E86AB",
+  "Open Water" = "#7FB3D5",
+  "Savanna" = "#D4A017",
+  "Barren-Rock/Sand/Clay" = "#7F8C8D"
+)
+
+ggplot(top10, aes(x = reorder(BPS_NAME, ACRES), y = ACRES, fill = GROUPVEG)) +
+  geom_col(width = 0.75) +
+  coord_flip() +
+  scale_y_continuous(labels = label_comma(), expand = expansion(mult = c(0, 0.06))) +
+  scale_fill_manual(values = group_colors) +
+  labs(
+    title = "Top 10 historical ecosystems",
+    subtitle = "Monongahela National Forest",
+    x = NULL,
+    y = "Acres",
+    fill = "Vegetation group"
+  ) +
+  theme_bw(base_size = 13) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.major.y = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+```
+
+`r top_row$BPS_NAME` covers the most ground in this summary, about `r scales::comma(round(top_row$ACRES))` acres. Oak forests and Appalachian (hemlock)–northern hardwood forest follow. Riparian systems and rocky oak-pine woodland are on the forest too, on much less area.
+
+## Wooden Man Weather
+
+[Wooden Man Weather](https://rswaty.github.io/woodenmanweather/) is a dashboard for Marquette and the central Upper Peninsula. It is built to be checked: the forecast beside the recent year, and how that year compares with normal. Same publishing tool as this site, different pace.

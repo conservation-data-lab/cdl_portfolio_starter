@@ -1,0 +1,170 @@
+/* Portfolio tweaks on the Flatly theme. */
+
+#title-block-header .title {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+#title-block-header .subtitle {
+  font-size: 1.15rem;
+  color: #3d4f45;
+  margin-top: 0.25rem;
+}
+
+.navbar .navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.page-footer {
+  margin-top: 3rem;
+  border-top: 1px solid #e6e2d8;
+}
+
+/* Content spans the window, with a small inset so text does not touch the edge. */
+@media (min-width: 992px) {
+  body .page-columns {
+    grid-template-columns:
+      [screen-start] 1.5rem
+      [screen-start-inset] 0px
+      [page-start page-start-inset] 0px
+      [body-start-outset] 0px
+      [body-start] 0px
+      [body-content-start] minmax(0px, 1fr)
+      [body-content-end] 0px
+      [body-end] 0px
+      [body-end-outset] 0px
+      [page-end-inset] 0px
+      [page-end] 0px
+      [screen-end-inset] 1.5rem
+      [screen-end] !important;
+  }
+}
+
+/* Center a single content column. The navbar still runs edge to edge. */
+main.content {
+  width: 100%;
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+  gap: 1.5rem 2.75rem;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.hero-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.hero-art .quarto-figure,
+.hero-art figure {
+  margin: 0;
+}
+
+.hero-art img {
+  width: 100%;
+  max-height: 26rem;
+  object-fit: contain;
+  border: 1px solid #e4e0d6;
+  border-radius: 8px;
+  background: #f7f4ee;
+}
+
+.hero-art figcaption {
+  margin-top: 0.55rem;
+  color: #5c6b62;
+  font-size: 0.92rem;
+}
+
+.work {
+  margin-top: 2.75rem;
+}
+
+.work > h2 {
+  max-width: none;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .hero,
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-art {
+    order: -1;
+    max-width: 24rem;
+  }
+}
+
+.about-slides .html-widget,
+.about-slides .slick-slider {
+  width: 100% !important;
+  height: 28rem !important;
+  margin-bottom: 0.5rem;
+}
+
+.about-slides .slick-slide img {
+  width: 100%;
+  height: 28rem;
+  object-fit: contain;
+  background: #f7f4ee;
+}
+
+.about-slides .slick-prev,
+.about-slides .slick-next {
+  z-index: 2;
+}
+
+.about-slides .slick-prev {
+  left: 16px;
+}
+
+.about-slides .slick-next {
+  right: 16px;
+}
+
+.about-slides .slick-dots li button:before {
+  color: #1f3a2e;
+  opacity: 0.4;
+  font-size: 12px;
+}
+
+.about-slides .slick-dots li.slick-active button:before {
+  color: #1f3a2e;
+  opacity: 1;
+}
+
+.quarto-figure img {
+  height: auto;
+}
+
+.card {
+  border: 1px solid #e4e0d6;
+  border-radius: 8px;
+  height: 100%;
+  background: #fffcf7;
+}
+
+.card-body {
+  padding: 1.25rem 1.35rem 1.1rem;
+}
+
+.card-body h4 {
+  margin-top: 0;
+  color: #1f3a2e;
+}
+
+table {
+  font-size: 0.95rem;
+}

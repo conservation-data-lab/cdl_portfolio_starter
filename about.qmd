@@ -1,0 +1,50 @@
+---
+title: "About"
+subtitle: "Ecologist, LANDFIRE team"
+---
+
+I work with The Nature Conservancy's LANDFIRE team. The assessments I publish are a way into a landscape: historical ecosystems, current vegetation, and the patterns a manager can actually use.
+
+Two examples are on this site. The [projects](projects.qmd) page charts Biophysical Settings for Monongahela National Forest. [Wooden Man Weather](https://rswaty.github.io/woodenmanweather/) is a smaller site, a weather dashboard for Marquette, Michigan.
+
+The longer record — roles, collaborators, and the rest of the work — is on [LinkedIn](https://www.linkedin.com/in/randyswaty/).
+
+The painting on the [home page](index.qmd) is by Leo Barch. It was made for the Monongahela assessment.
+
+## In pictures
+
+::: {.about-slides}
+
+```{r}
+#| label: about-slides
+#| echo: false
+
+#remotes::install_github('yonicd/slickR')
+
+library(slickR)
+
+# Drop replacement images in assets/slides and add their paths here.
+slides <- c(
+  "assets/slides/pixel-painting.png",
+  "assets/slides/historical-ecosystems.png",
+  "assets/slides/woodenman-logo.jpg"
+)
+
+slickR(
+  obj = slides,
+  height = 560,
+  width = "100%"
+) +
+  settings(
+    dots = TRUE,
+    arrows = TRUE,
+    infinite = TRUE,
+    autoplay = TRUE,
+    autoplaySpeed = 4000,
+    pauseOnHover = TRUE,
+    slidesToShow = 1,
+    slidesToScroll = 1
+  )
+```
+
+:::

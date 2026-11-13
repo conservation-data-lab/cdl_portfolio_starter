@@ -1,0 +1,53 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - assets/slides
+
+website:
+  title: "Randy Swaty"
+  description: "Portfolio of landscape assessments, charts, and a weather dashboard."
+  page-navigation: true
+  navbar:
+    background: "#1f3a2e"
+    foreground: "#f7f4ee"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About
+    right:
+      - href: instructions.qmd
+        text: Instructions
+      - icon: linkedin
+        href: https://www.linkedin.com/in/randyswaty/
+        aria-label: Randy Swaty on LinkedIn
+  page-footer:
+    left: "Randy Swaty"
+    right:
+      - text: Instructions
+        href: instructions.qmd
+      - text: LinkedIn
+        href: https://www.linkedin.com/in/randyswaty/
+      - text: Wooden Man Weather
+        href: https://rswaty.github.io/woodenmanweather/
+
+format:
+  html:
+    page-layout: full
+    theme: flatly
+    css: styles.css
+    toc: false
+    smooth-scroll: true
+    link-external-newwindow: true
+    fig-align: center
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+  message: false
+
+editor: source

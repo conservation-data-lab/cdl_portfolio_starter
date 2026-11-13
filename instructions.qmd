@@ -1,0 +1,80 @@
+---
+title: "Instructions"
+subtitle: "How this portfolio is built, and how to make it yours"
+---
+
+The other pages are the portfolio. This page is the workshop sheet. Home, Projects, and About should read as finished work. Everything about folders, YAML, and rendering stays here.
+
+::: {.callout-note}
+Render from this folder with `quarto preview` while you edit, or `quarto render` when you want the HTML in `docs/`. In RStudio, the Render button does the same job.
+:::
+
+## What a visitor sees
+
+| Page | File | What it is |
+|---|---|---|
+| Home | `index.qmd` | Name of the work, the pixel painting, two project cards |
+| Projects | `projects.qmd` | Monongahela chart, then Wooden Man Weather |
+| About | `about.qmd` | Short bio and a picture slideshow |
+| Instructions | `instructions.qmd` | This page |
+
+The painting is `assets/pixel_painting.png`. The chart reads `inputs/bps_monongahela.csv`. The About page slideshow reads the files in `assets/slides/`. Shared settings — the site title, navbar, theme, and footer — live in `_quarto.yml`. The pages run full width: `page-layout: full` in that file, and the column grid in `styles.css`.
+
+## YAML
+
+Each `.qmd` file opens with a block between `---` lines. That block belongs to one page. Home looks like this:
+
+```yaml
+---
+title: "Landscape assessments"
+subtitle: "Charts and short sites from ecological data"
+---
+```
+
+`_quarto.yml` belongs to the whole site. The navbar is why Home, Projects, and About sit on the left, and why Instructions and LinkedIn sit on the right:
+
+```yaml
+website:
+  title: "Randy Swaty"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About
+    right:
+      - href: instructions.qmd
+        text: Instructions
+      - icon: linkedin
+        href: https://www.linkedin.com/in/randyswaty/
+```
+
+`project: type: website` tells Quarto to publish these pages together and write the HTML to `docs/`. `format: html` chooses the Flatly theme and `styles.css`.
+
+## The chart
+
+On the projects page the code is hidden (`echo: false`), which is what you want in a portfolio. Open `projects.qmd` and find the chunk labeled `bps-chart`. The working part is:
+
+```r
+bps <- read.csv("inputs/bps_monongahela.csv")
+
+top10 <- bps |>
+  group_by(BPS_NAME, GROUPVEG) |>
+  summarize(ACRES = sum(ACRES), .groups = "drop") |>
+  slice_max(order_by = ACRES, n = 10)
+```
+
+The sentence under the chart is inline R from that same chunk (`top_row`). Change the data, render again, and the sentence updates with the figure.
+
+## Make it your portfolio
+
+1. Change the site title in `_quarto.yml`, and the titles in `index.qmd` and `about.qmd`.
+2. Swap `assets/pixel_painting.png` for your own image, and rewrite the caption on the home page.
+3. Replace the files in `assets/slides/` and the path list in the `about-slides` chunk on `about.qmd`. That chunk is a slickR slideshow.
+4. Put your table in `inputs/`, point `read.csv()` at it, and rewrite the paragraphs on `projects.qmd` so they describe your result.
+5. Replace the Wooden Man Weather link, in the footer and on the home and projects pages, with a project of yours. The other off-site link on this demo is [LinkedIn](https://www.linkedin.com/in/randyswaty/).
+6. To add a page, create a new `.qmd` file and add a matching `href` under `navbar` in `_quarto.yml`.
+
+Keep the portfolio pages in the voice of the work. Put notes to yourself, folder maps, and render steps on a page like this one.

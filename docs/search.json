@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Biophysical Settings describe the vegetation a place would have supported before Euro-American settlement, given the land and its historical disturbance regime. This summary covers Monongahela National Forest. The table is one row per setting.\n\n\n\n\n\nTen largest Biophysical Settings on Monongahela National Forest.\n\n\n\n\nCentral and Southern Appalachian Spruce-Fir Forest covers the most ground in this summary, about 454,640 acres. Oak forests and Appalachian (hemlock)–northern hardwood forest follow. Riparian systems and rocky oak-pine woodland are on the forest too, on much less area."
+  },
+  {
+    "objectID": "projects.html#monongahela-national-forest",
+    "href": "projects.html#monongahela-national-forest",
+    "title": "Projects",
+    "section": "",
+    "text": "Biophysical Settings describe the vegetation a place would have supported before Euro-American settlement, given the land and its historical disturbance regime. This summary covers Monongahela National Forest. The table is one row per setting.\n\n\n\n\n\nTen largest Biophysical Settings on Monongahela National Forest.\n\n\n\n\nCentral and Southern Appalachian Spruce-Fir Forest covers the most ground in this summary, about 454,640 acres. Oak forests and Appalachian (hemlock)–northern hardwood forest follow. Riparian systems and rocky oak-pine woodland are on the forest too, on much less area."
+  },
+  {
+    "objectID": "projects.html#wooden-man-weather",
+    "href": "projects.html#wooden-man-weather",
+    "title": "Projects",
+    "section": "Wooden Man Weather",
+    "text": "Wooden Man Weather\nWooden Man Weather is a dashboard for Marquette and the central Upper Peninsula. It is built to be checked: the forecast beside the recent year, and how that year compares with normal. Same publishing tool as this site, different pace."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I work with The Nature Conservancy’s LANDFIRE team. The assessments I publish are a way into a landscape: historical ecosystems, current vegetation, and the patterns a manager can actually use.\nTwo examples are on this site. The projects page charts Biophysical Settings for Monongahela National Forest. Wooden Man Weather is a smaller site, a weather dashboard for Marquette, Michigan.\nThe longer record — roles, collaborators, and the rest of the work — is on LinkedIn.\nThe painting on the home page is by Leo Barch. It was made for the Monongahela assessment."
+  },
+  {
+    "objectID": "about.html#in-pictures",
+    "href": "about.html#in-pictures",
+    "title": "About",
+    "section": "In pictures",
+    "text": "In pictures"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Landscape assessments",
+    "section": "",
+    "text": "I am an ecologist with The Nature Conservancy’s LANDFIRE team. I publish landscape assessments so a forest’s history is something you can look at: which ecosystems covered the ground, and how much.\nThis site collects a few of those pieces. The Monongahela chart is a Biophysical Settings summary. Wooden Man Weather is a dashboard for Marquette, Michigan. A longer professional record is on LinkedIn.\n\n\n\n\n\nPixel painting by Leo Barch."
+  },
+  {
+    "objectID": "index.html#selected-work",
+    "href": "index.html#selected-work",
+    "title": "Landscape assessments",
+    "section": "Selected work",
+    "text": "Selected work\n\n\n\nMonongahela National Forest\nHistorical ecosystems, in acres. Spruce-fir forest covers more of this summary than any other Biophysical Setting.\nView the chart\n\n\n\n\nWooden Man Weather\nA weather dashboard for Marquette and the central Upper Peninsula, published as its own Quarto site.\nOpen the site"
+  },
+  {
+    "objectID": "instructions.html",
+    "href": "instructions.html",
+    "title": "Instructions",
+    "section": "",
+    "text": "The other pages are the portfolio. This page is the workshop sheet. Home, Projects, and About should read as finished work. Everything about folders, YAML, and rendering stays here."
+  },
+  {
+    "objectID": "instructions.html#what-a-visitor-sees",
+    "href": "instructions.html#what-a-visitor-sees",
+    "title": "Instructions",
+    "section": "What a visitor sees",
+    "text": "What a visitor sees\n\n\n\n\n\n\n\n\nPage\nFile\nWhat it is\n\n\n\n\nHome\nindex.qmd\nName of the work, the pixel painting, two project cards\n\n\nProjects\nprojects.qmd\nMonongahela chart, then Wooden Man Weather\n\n\nAbout\nabout.qmd\nShort bio and a picture slideshow\n\n\nInstructions\ninstructions.qmd\nThis page\n\n\n\nThe painting is assets/pixel_painting.png. The chart reads inputs/bps_monongahela.csv. The About page slideshow reads the files in assets/slides/. Shared settings — the site title, navbar, theme, and footer — live in _quarto.yml. The pages run full width: page-layout: full in that file, and the column grid in styles.css."
+  },
+  {
+    "objectID": "instructions.html#yaml",
+    "href": "instructions.html#yaml",
+    "title": "Instructions",
+    "section": "YAML",
+    "text": "YAML\nEach .qmd file opens with a block between --- lines. That block belongs to one page. Home looks like this:\n---\ntitle: \"Landscape assessments\"\nsubtitle: \"Charts and short sites from ecological data\"\n---\n_quarto.yml belongs to the whole site. The navbar is why Home, Projects, and About sit on the left, and why Instructions and LinkedIn sit on the right:\nwebsite:\n  title: \"Randy Swaty\"\n  navbar:\n    left:\n      - href: index.qmd\n        text: Home\n      - href: projects.qmd\n        text: Projects\n      - href: about.qmd\n        text: About\n    right:\n      - href: instructions.qmd\n        text: Instructions\n      - icon: linkedin\n        href: https://www.linkedin.com/in/randyswaty/\nproject: type: website tells Quarto to publish these pages together and write the HTML to docs/. format: html chooses the Flatly theme and styles.css."
+  },
+  {
+    "objectID": "instructions.html#the-chart",
+    "href": "instructions.html#the-chart",
+    "title": "Instructions",
+    "section": "The chart",
+    "text": "The chart\nOn the projects page the code is hidden (echo: false), which is what you want in a portfolio. Open projects.qmd and find the chunk labeled bps-chart. The working part is:\nbps &lt;- read.csv(\"inputs/bps_monongahela.csv\")\n\ntop10 &lt;- bps |&gt;\n  group_by(BPS_NAME, GROUPVEG) |&gt;\n  summarize(ACRES = sum(ACRES), .groups = \"drop\") |&gt;\n  slice_max(order_by = ACRES, n = 10)\nThe sentence under the chart is inline R from that same chunk (top_row). Change the data, render again, and the sentence updates with the figure."
+  },
+  {
+    "objectID": "instructions.html#make-it-your-portfolio",
+    "href": "instructions.html#make-it-your-portfolio",
+    "title": "Instructions",
+    "section": "Make it your portfolio",
+    "text": "Make it your portfolio\n\nChange the site title in _quarto.yml, and the titles in index.qmd and about.qmd.\nSwap assets/pixel_painting.png for your own image, and rewrite the caption on the home page.\nReplace the files in assets/slides/ and the path list in the about-slides chunk on about.qmd. That chunk is a slickR slideshow.\nPut your table in inputs/, point read.csv() at it, and rewrite the paragraphs on projects.qmd so they describe your result.\nReplace the Wooden Man Weather link, in the footer and on the home and projects pages, with a project of yours. The other off-site link on this demo is LinkedIn.\nTo add a page, create a new .qmd file and add a matching href under navbar in _quarto.yml.\n\nKeep the portfolio pages in the voice of the work. Put notes to yourself, folder maps, and render steps on a page like this one."
+  }
+]
